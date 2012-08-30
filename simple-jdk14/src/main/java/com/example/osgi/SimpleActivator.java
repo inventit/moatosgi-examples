@@ -5,9 +5,6 @@
  */
 package com.example.osgi;
 
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import org.osgi.framework.BundleActivator;
@@ -19,6 +16,10 @@ import com.example.moat.MyModelPluginDao;
 import com.example.model.MyChildModel;
 import com.example.model.MyModel;
 import com.yourinventit.dmc.api.moat.Moat;
+
+import edu.emory.mathcs.backport.java.util.concurrent.ScheduledExecutorService;
+import edu.emory.mathcs.backport.java.util.concurrent.ScheduledThreadPoolExecutor;
+import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
 
 /**
  * A {@link BundleActivator} for this example bundle.

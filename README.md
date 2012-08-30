@@ -26,6 +26,10 @@ Copyright © 2012 Inventit Inc.
 
 ## Change History
 
+1.1.1 : August 30, 2012
+* MOAT OSGi Example :: Simple Bundle for JDK1.4
+  * Fixes an issue where a bundle activator class depends on JDK5+ classes.
+
 1.1.0 : August 4, 2012
 
 * MOAT OSGi Example :: Simple Bundle for JDK1.4
