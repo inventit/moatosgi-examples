@@ -26,6 +26,13 @@ Copyright © 2012 Inventit Inc.
 
 ## Change History
 
+1.1.2 : September 3, 2012
+* MOAT OSGi Example :: Simple Bundle for JDK1.4
+  * Updates the version in the pom.xml.
+  * Fixes an issue where <Export-Package> doesn't contain other packages than com.example.moat.
+  * Adds logging on MyServiceTask and isTimeToNotify() returns true by default.
+  * Changes ScheduledExecutorService instance into an OSGi service.
+
 1.1.1 : August 30, 2012
 * MOAT OSGi Example :: Simple Bundle for JDK1.4
   * Fixes an issue where a bundle activator class depends on JDK5+ classes.

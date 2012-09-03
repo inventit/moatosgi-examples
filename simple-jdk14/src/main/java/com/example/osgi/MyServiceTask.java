@@ -5,6 +5,9 @@
  */
 package com.example.osgi;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.example.model.MyModel;
 import com.yourinventit.dmc.api.moat.Moat;
 
@@ -16,6 +19,11 @@ import com.yourinventit.dmc.api.moat.Moat;
  * 
  */
 public class MyServiceTask implements Runnable {
+
+    /**
+     * {@link Logger}
+     */
+    private static final Logger LOGGER = Logger.getLogger("MyServiceTask");
 
     /**
      * {@link Moat}
@@ -45,14 +53,18 @@ public class MyServiceTask implements Runnable {
     public void run() {
         if (isTimeToNotify()) {
             final MyModel model = new MyModel();
-            model.setUid("my-uid-123");
+            model.setUid(String.valueOf(System.currentTimeMillis()));
             model.setStringValue("stringValue");
-            model.setIntValue(Integer.MIN_VALUE);
-            getMoat()
-                    .sendNotification(
-                            // The job service id follow the URN format.
-                            "urn:moat:485b593b-45ce-40e1-88e1-658fbf20e5fa:MyApp:alert-notificaton-request:1.0",
-                            null, new Object[] { model });
+            model.setIntValue((int) (Math.random() * 500));
+            try {
+                getMoat()
+                        .sendNotification(
+                                // The job service id follow the URN format.
+                                "urn:moat:485b593b-45ce-40e1-88e1-658fbf20e5fa:MyApp:alert-notificaton-request:1.0",
+                                null, new Object[] { model });
+            } catch (RuntimeException exception) {
+                LOGGER.log(Level.SEVERE, "error!", exception);
+            }
         }
     }
 
@@ -62,8 +74,8 @@ public class MyServiceTask implements Runnable {
      * @return
      */
     protected boolean isTimeToNotify() {
-        // TODO
-        return false;
+        // TODO Implements when to notify.
+        return true;
     }
 
 }
