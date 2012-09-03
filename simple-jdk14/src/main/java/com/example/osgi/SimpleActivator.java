@@ -18,7 +18,7 @@ import com.example.model.MyModel;
 import com.yourinventit.dmc.api.moat.Moat;
 
 import edu.emory.mathcs.backport.java.util.concurrent.ScheduledExecutorService;
-import edu.emory.mathcs.backport.java.util.concurrent.ScheduledThreadPoolExecutor;
+import edu.emory.mathcs.backport.java.util.concurrent.ScheduledFuture;
 import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
 
 /**
@@ -45,6 +45,16 @@ public class SimpleActivator implements BundleActivator {
     private ServiceReference moatReference = null;
 
     /**
+     * {@link ServiceReference}
+     */
+    private ServiceReference scheduledExecutorServiceReference = null;
+
+    /**
+     * {@link ScheduledFuture}
+     */
+    private ScheduledFuture scheduledFuture = null;
+
+    /**
      * {@link Moat}
      */
     private Moat moat = null;
@@ -66,6 +76,20 @@ public class SimpleActivator implements BundleActivator {
      */
     protected ServiceReference getMoatReference() {
         return moatReference;
+    }
+
+    /**
+     * @return the scheduledExecutorServiceReference
+     */
+    protected ServiceReference getScheduledExecutorServiceReference() {
+        return scheduledExecutorServiceReference;
+    }
+
+    /**
+     * @return the scheduledFuture
+     */
+    protected ScheduledFuture getScheduledFuture() {
+        return scheduledFuture;
     }
 
     /**
@@ -142,9 +166,11 @@ public class SimpleActivator implements BundleActivator {
      */
     private ScheduledExecutorService initScheduledExecutorService(
             BundleContext bundleContext) {
-        final ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(
-                10);
-        this.scheduledExecutorService = scheduledExecutorService;
+        final ServiceReference reference = bundleContext
+                .getServiceReference(ScheduledExecutorService.class.getName());
+        this.scheduledExecutorServiceReference = reference;
+        this.scheduledExecutorService = (ScheduledExecutorService) bundleContext
+                .getService(reference);
         return scheduledExecutorService;
     }
 
@@ -179,8 +205,9 @@ public class SimpleActivator implements BundleActivator {
         moat.registerModel("./DevDetail/Ext/ExampleCorp", MyChildModel.class,
                 myChildModelPlugnDao, getContextFactory());
 
-        getScheduledExecutorService().scheduleWithFixedDelay(
-                initMyServiceTask(context), 10, 60, TimeUnit.SECONDS);
+        this.scheduledFuture = getScheduledExecutorService()
+                .scheduleWithFixedDelay(initMyServiceTask(context), 10, 60,
+                        TimeUnit.SECONDS);
         LOGGER.fine("[END] start()");
     }
 
@@ -194,7 +221,12 @@ public class SimpleActivator implements BundleActivator {
         if (getMoatReference() != null) {
             context.ungetService(getMoatReference());
         }
+        if (getScheduledFuture() != null) {
+            getScheduledFuture().cancel(true);
+        }
+        if (getScheduledExecutorServiceReference() != null) {
+            context.ungetService(getScheduledExecutorServiceReference());
+        }
         LOGGER.fine("[END] stop()");
     }
-
 }

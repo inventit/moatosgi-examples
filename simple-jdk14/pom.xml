@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.yourinventit.moat.osgi.example</groupId>
 	<artifactId>moat-osgi-simple-jdk14</artifactId>
-	<version>1.0.1</version>
+	<version>1.1.2</version>
 	<packaging>bundle</packaging>
 	<description>MOAT OSGi Example :: Simple Bundle for JDK1.4</description>
 	<distributionManagement>
@@ -96,7 +96,7 @@
 				<configuration>
 					<excludeDependencies>*;scope=provided|runtime</excludeDependencies>
 					<instructions>
-						<Export-Package>com.example.moat</Export-Package>
+						<Export-Package>com.example.*</Export-Package>
 						<Private-Package>com.example.*</Private-Package>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Activator>com.example.osgi.SimpleActivator</Bundle-Activator>
