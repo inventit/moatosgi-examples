@@ -1,7 +1,7 @@
 Example modules for MOAT OSGi API
 =================
 
-This project introduces source code examples using [MOAT OSGi](http://inventit.edicy.co/guides/moat-iot/moat-osgi-gateway) API, a part of [MOAT IoT](http://inventit.edicy.co/guides/moat-iot).
+This project introduces source code examples using [MOAT OSGi](http://dev.yourinventit.com/guides/moat-iot/moat-osgi-gateway) API, a part of [MOAT IoT](http://dev.yourinventit.com/guides/moat-iot).
 
 You can build each project with [Maven2](http://maven.apache.org/). The built jar is an OSGi bundle so that you can deploy it onto an OSGi container.
 
@@ -25,6 +25,9 @@ All modules of this project are dual-licensed under:
 Copyright © 2012 Inventit Inc.
 
 ## Change History
+
+1.1.3 : December 6, 2012
+* Changes the link URLs in this file
 
 1.1.2 : September 3, 2012
 * MOAT OSGi Example :: Simple Bundle for JDK1.4
