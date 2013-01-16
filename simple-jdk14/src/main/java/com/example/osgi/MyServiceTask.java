@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 InventIt Inc.
+ * Copyright (C) 2013 InventIt Inc.
  * 
  * See https://github.com/inventit/moatosgi-examples
  */
