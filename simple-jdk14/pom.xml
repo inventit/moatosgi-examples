@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.yourinventit.moat.osgi.example</groupId>
 	<artifactId>moat-osgi-simple-jdk14</artifactId>
-	<version>1.1.2</version>
+	<version>1.2.0</version>
 	<packaging>bundle</packaging>
 	<description>MOAT OSGi Example :: Simple Bundle for JDK1.4</description>
 	<distributionManagement>
