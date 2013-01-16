@@ -1,18 +1,17 @@
 /*
- * Copyright (C) 2012 InventIt Inc.
+ * Copyright (C) 2013 InventIt Inc.
  * 
  * See https://github.com/inventit/moatosgi-examples
  */
 package com.example.osgi;
 
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.osgi.framework.BundleContext;
 
-import com.example.moat.MyChildModelPluginDao;
-import com.example.moat.MyModelPluginDao;
+import com.example.moat.MyChildModelMapper;
+import com.example.moat.MyModelMapper;
 import com.yourinventit.dmc.api.moat.ContextFactory;
 
 /**
@@ -23,57 +22,56 @@ import com.yourinventit.dmc.api.moat.ContextFactory;
  */
 class SimpleContextFactory implements ContextFactory {
 
-    /**
-     * {@link BundleContext}
-     */
-    private BundleContext bundleContext;
+	/**
+	 * {@link BundleContext}
+	 */
+	private BundleContext bundleContext;
 
-    /**
-     * {@link MyModelPluginDao}
-     */
-    private MyModelPluginDao myModelPluginDao;
+	/**
+	 * {@link MyModelMapper}
+	 */
+	private MyModelMapper myModelMapper;
 
-    /**
-     * {@link MyChildModelPluginDao}
-     */
-    private MyChildModelPluginDao myChildModelPluginDao;
+	/**
+	 * {@link MyChildModelMapper}
+	 */
+	private MyChildModelMapper myChildModelMapper;
 
-    /**
-     * @param bundleContext
-     *            the bundleContext to set
-     */
-    public void setBundleContext(BundleContext bundleContext) {
-        this.bundleContext = bundleContext;
-    }
+	/**
+	 * @param bundleContext
+	 *            the bundleContext to set
+	 */
+	public void setBundleContext(BundleContext bundleContext) {
+		this.bundleContext = bundleContext;
+	}
 
-    /**
-     * @param myModelPluginDao
-     *            the myModelPluginDao to set
-     */
-    public void setMyModelPluginDao(MyModelPluginDao myModelPluginDao) {
-        this.myModelPluginDao = myModelPluginDao;
-    }
+	/**
+	 * @param myModelMapper
+	 *            the myModelMapper to set
+	 */
+	public void setMyModelMapper(MyModelMapper myModelMapper) {
+		this.myModelMapper = myModelMapper;
+	}
 
-    /**
-     * @param myChildModelPluginDao
-     *            the myChildModelPluginDao to set
-     */
-    public void setMyChildModelPluginDao(
-            MyChildModelPluginDao myChildModelPluginDao) {
-        this.myChildModelPluginDao = myChildModelPluginDao;
-    }
+	/**
+	 * @param myChildModelMapper
+	 *            the myChildModelMapper to set
+	 */
+	public void setMyChildModelMapper(MyChildModelMapper myChildModelMapper) {
+		this.myChildModelMapper = myChildModelMapper;
+	}
 
-    /**
-     * {@inheritDoc}
-     * 
-     * @see com.yourinventit.dmc.api.moat.ContextFactory#createExecutionContext(java.lang.Object,
-     *      java.lang.reflect.Method)
-     */
-    public Map createExecutionContext(Object model, Method method) {
-        final Map context = new HashMap();
-        context.put(BundleContext.class, bundleContext);
-        context.put(MyModelPluginDao.class, myModelPluginDao);
-        context.put(MyChildModelPluginDao.class, myChildModelPluginDao);
-        return context;
-    }
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see com.yourinventit.dmc.api.moat.ContextFactory#createExecutionContext(java.lang.Object,
+	 *      java.lang.String)
+	 */
+	public Map createExecutionContext(Object model, String methodName) {
+		final Map context = new HashMap();
+		context.put(BundleContext.class, bundleContext);
+		context.put(MyModelMapper.class, myModelMapper);
+		context.put(MyChildModelMapper.class, myChildModelMapper);
+		return context;
+	}
 }
